@@ -4,6 +4,12 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>nk-profile Basic Style</title>
+	<style>
+		body {
+			padding: 100px;
+			text-align: center;
+		}
+	</style>
 	<script type="module">
 		import { Profile } from '../nk-profile.js'
 
@@ -18,7 +24,7 @@
 		prof.links.push(['Example', 'https://example.com'])
 		prof.links.push(['postmaster@example.com', 'mailto:postmaster@example.com'])
 
-		document.head.appendChild(prof.createStyleTag())
+		document.head.appendChild(prof.createStyle())
 		document.body.appendChild(prof.createRoot())
 	</script>
 </head>

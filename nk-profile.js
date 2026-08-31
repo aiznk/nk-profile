@@ -216,6 +216,7 @@ export class Profile {
 			}
 			.nk-profile__texts-item {
 				text-indent: 1rem;
+				text-align: left;
 				color: var(--font-color);
 				margin-bottom: var(--pad-y);
 			}
@@ -241,7 +242,7 @@ export class Profile {
 		return style
 	}
 
-	createStyleTag (kind='basic') {
+	createStyle (kind='basic') {
 		switch (kind) {
 		case 'basic': return this.createBasicStyleTag(); break
 		}
