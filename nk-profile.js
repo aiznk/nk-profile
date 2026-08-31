@@ -221,6 +221,7 @@ export class Profile {
 			}
 			.nk-profile__links-link {
 				color: var(--link-color);
+				text-decoration: underline;
 				padding-right: 0;
 				transition: all .3s;
 			}
