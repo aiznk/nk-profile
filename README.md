@@ -4,7 +4,7 @@ Create the profile element with parameters.
 
 ## Example
 
-![basic-style](./res/basic-style.png)
+![basic-style](./res/basic-style.gif)
 
 ```js
 import { Profile } from '../nk-profile.js'
