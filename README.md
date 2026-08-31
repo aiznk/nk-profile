@@ -20,7 +20,7 @@ prof.links.push('https://example.com')
 prof.links.push(['Example', 'https://example.com'])
 prof.links.push(['postmaster@example.com', 'mailto:postmaster@example.com'])
 
-document.head.appendChild(prof.createStyleTag())
+document.head.appendChild(prof.createStyle())
 document.body.appendChild(prof.createRoot())
 ```
 
