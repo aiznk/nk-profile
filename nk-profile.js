@@ -135,7 +135,7 @@ export class Profile {
 		return ul
 	}
 
-	createBasicStyleTag () {
+	createBasicStyle () {
 		let style = document.createElement('style')	
 		style.textContent = `
 			.nk-profile {
@@ -242,9 +242,119 @@ export class Profile {
 		return style
 	}
 
+	createGlassStyle () {
+		let style = document.createElement('style')	
+		style.textContent = `
+			.nk-profile {
+				--pad-y: calc(1rem*0.6); 
+				--pad-x: calc(1.618rem*0.6);
+				--width: ${this._width};
+				--font-color: white;
+				--font-color-anime: #68699b;
+				--link-color: #a0d8ef;
+				--link-color-hover: #eebbcb;
+				--border-color: #dcdddd;
+				--border-radius: 6px;
+				display: inline-block;
+				width: var(--width);
+				border: 1px solid var(--border-color);
+				border-radius: var(--border-radius);
+				background: var(--bg-color);
+				background: rgba(255, 255, 255, 0.25);
+				backdrop-filter: blur(12px);
+				padding: var(--pad-y) var(--pad-x);
+				transition: all 0.3s;
+			}
+			.nk-profile * {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			    font-family:
+			        system-ui,
+			        -apple-system,
+			        BlinkMacSystemFont,
+			        "Segoe UI",
+			        sans-serif;
+			    transition:
+			        transform 0.3s ease,
+			        box-shadow 0.3s ease;
+			}
+			.nk-profile:hover {
+			    transform: translateY(-6px);
+			    box-shadow:
+			        0 12px 30px rgba(0, 0, 0, 0.15);
+			}
+			.nk-profile__image-wrapper {
+				position: relative;
+				text-align: center;
+				margin-bottom: var(--pad-y);
+			}
+			.nk-profile__image {
+				width: var(--width);
+				height: auto;
+				max-width: 100%;
+				border-top: 4px solid #eae5e3;
+				border-left: 4px solid #eae5e3;
+				border-bottom: 4px solid #adadad;
+				border-right: 4px solid #adadad;
+				border-radius: var(--border-radius);
+				transition: all 0.5s;
+			}
+			.nk-profile__image:hover {
+				transform: scale(1.03);
+			}
+			.nk-profile__name-wrapper {
+				text-align: center;
+				margin-bottom: var(--pad-y);
+			}
+			.nk-profile__name {
+				color: var(--font-color);
+				font-weight: bold;
+				font-size: calc(var(--pad-x)*1.4);
+				transition: all 0.3s
+			}
+			.nk-profile__name--anime {
+				color: var(--font-color-anime)
+			}
+			.nk-profile__texts {
+				margin-bottom: var(--pad-y);
+				list-style: none;
+			}
+			.nk-profile__texts-item {
+				text-align: center;
+				color: var(--font-color);
+				margin-bottom: var(--pad-y);
+			}
+			.nk-profile__links {
+				list-style: none;
+				text-align: right;
+			}
+			.nk-profile__links-item {
+				margin-bottom: var(--pad-y);
+				text-align: center;
+			}
+			.nk-profile__links-link {
+				position: relative;
+				top: 0;
+				color: var(--link-color);
+				text-decoration: underline;
+				padding-right: 0;
+				transition: all .3s;
+			}
+			.nk-profile__links-link:hover {
+				color: var(--link-color-hover);
+				text-decoration: none;
+				top: -0.2em;
+			}
+		`
+		return style
+	}
+
 	createStyle (kind='basic') {
 		switch (kind) {
-		case 'basic': return this.createBasicStyleTag(); break
+		default: throw new Error(`unknown style kind "${kind}"`); break
+		case 'basic': return this.createBasicStyle(); break
+		case 'glass': return this.createGlassStyle(); break
 		}
 	}
 

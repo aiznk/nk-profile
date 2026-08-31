@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>nk-profile Basic Style</title>
+	<style>
+		body {
+			padding: 100px;
+			background: #666;
+		}
+		.wrapper {
+			display: inline-block;
+			positon: relative;
+			transform: translateX(calc(50vw - 300px));
+		}
+		.box1 {
+			position: absolute;
+			top: 50px;
+			left: calc(50vw - 300px);
+			width: 300px;
+			height: 300px;
+			background: orange;
+		}
+		.box2 {
+			position: absolute;
+			top: 450px;
+			left: calc(50vw);
+			width: 200px;
+			height: 200px;
+			background: red;
+		}
+	</style>
+	<script type="module">
+		import { Profile } from '../nk-profile.js'
+
+		let prof = new Profile()
+
+		prof.width = '300px'
+		prof.image = './women.png'
+		prof.name = 'Tanaka Mari'
+		prof.texts.push('Hi, I am Tanaka Mari. My hobby is programming.')
+		prof.texts.push('Please be friends.')
+		prof.links.push('https://example.com')
+		prof.links.push(['Example', 'https://example.com'])
+		prof.links.push(['postmaster@example.com', 'mailto:postmaster@example.com'])
+
+		document.head.appendChild(prof.createStyle('glass'))
+		document.querySelector('.wrapper').appendChild(prof.createRoot())
+	</script>
+</head>
+<body>
+	<div class="box1"></div>
+	<div class="box2"></div>
+	<div class="wrapper"></div>
+</body>
+</html>
