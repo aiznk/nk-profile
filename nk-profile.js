@@ -270,9 +270,11 @@ export class Profile {
 		if (this.lockAnimateName) {
 			return
 		}
+
 		this.lockAnimateName = true
+
 		let nameElem = this.root.querySelector('.nk-profile__name')
-		let orgName = nameElem.textContent
+		let orgName = this._name
 		let ary = orgName.split('')
 		let i = 0
 		const lim = 20
@@ -281,7 +283,7 @@ export class Profile {
 
 		nameElem.classList.add('nk-profile__name--anime')
 
-		function loop () {
+		const loop = () => {
 			let i1 = parseInt(Math.random() * ary.length)
 			let i2 = parseInt(Math.random() * ary.length)
 
@@ -301,7 +303,7 @@ export class Profile {
 			}
 		}
 
-		function undo () {
+		const undo = () => {
 			let [i1, i2] = history.pop()
 
 			tmp = ary[i2]
@@ -315,11 +317,10 @@ export class Profile {
 			} else {
 				nameElem.textContent = orgName
 				nameElem.classList.remove('nk-profile__name--anime')
+				this.lockAnimateName = false
 			}
 		}
 
 		requestAnimationFrame(loop)
-
-		this.lockAnimateName = false
 	}
 }
