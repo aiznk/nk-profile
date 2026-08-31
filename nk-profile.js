@@ -8,6 +8,15 @@ export class Profile {
 		this._links = []
 		this._width = '300px'
 		this.lockAnimateName = false
+		this._anime = 'shuffle'
+	}
+
+	set anime (anime) {
+		this._anime = anime
+	}
+
+	get anime () {
+		return this._anime
 	}
 
 	set width (width) {
@@ -129,7 +138,7 @@ export class Profile {
 	createBasicStyleTag () {
 		let style = document.createElement('style')	
 		style.textContent = `
-			:root { 
+			.nk-profile {
 				--pad-y: calc(1rem*0.6); 
 				--pad-x: calc(1.618rem*0.6);
 				--width: ${this._width};
@@ -141,19 +150,6 @@ export class Profile {
 				--link-color-hover: #d9333f;
 				--border-color: #dcdddd;
 				--border-radius: 6px;
-			}
-			.nk-profile * {
-				margin: 0;
-				padding: 0;
-				border-sizing: border-box;
-			    font-family:
-			        system-ui,
-			        -apple-system,
-			        BlinkMacSystemFont,
-			        "Segoe UI",
-			        sans-serif;
-			}
-			.nk-profile {
 				display: inline-block;
 				width: var(--width);
 				border: 1px solid var(--border-color);
@@ -167,8 +163,24 @@ export class Profile {
 				padding: var(--pad-y) var(--pad-x);
 				transition: all 0.6s;
 			}
+			.nk-profile * {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			    font-family:
+			        system-ui,
+			        -apple-system,
+			        BlinkMacSystemFont,
+			        "Segoe UI",
+			        sans-serif;
+			    transition:
+			        transform 0.3s ease,
+			        box-shadow 0.3s ease;
+			}
 			.nk-profile:hover {
-				box-shadow: 0 0 16px #ccc;
+			    transform: translateY(-6px);
+			    box-shadow:
+			        0 12px 30px rgba(0, 0, 0, 0.15);
 			}
 			.nk-profile__image-wrapper {
 				position: relative;
@@ -176,19 +188,14 @@ export class Profile {
 				margin-bottom: var(--pad-y);
 			}
 			.nk-profile__image {
-				position: relative;
-				top: 0;
-				left: 0;
 				width: var(--width);
 				height: auto;
-				max-width: var(--width);
-				max-height: var(--width);
+				max-width: 100%;
 				border-radius: var(--border-radius);
 				transition: all 0.3s;
 			}
 			.nk-profile__image:hover {
-				top: 4px;
-				left: 4px;
+				transform: scale(1.03);
 			}
 			.nk-profile__name-wrapper {
 				text-align: center;
@@ -259,9 +266,12 @@ export class Profile {
 			this.root.appendChild(this.createLinks())
 		}
 
-		this.root.querySelector('.nk-profile__name').addEventListener('mouseover', ev => {
-			this.animateName()
-		})
+		let name = this.root.querySelector('.nk-profile__name')
+		if (name) {
+			name.addEventListener('mouseover', ev => {
+				this.animateName()
+			})
+		}
 
 		return this.root
 	}
@@ -273,6 +283,13 @@ export class Profile {
 
 		this.lockAnimateName = true
 
+		switch (this._anime) {
+		default: throw new Error(`unknown anime kind "${this._anime}"`)
+		case 'shuffle': this.shuffleAnimeName(); break
+		}
+	}
+
+	shuffleAnimeName () {
 		let nameElem = this.root.querySelector('.nk-profile__name')
 		let orgName = this._name
 		let ary = orgName.split('')
