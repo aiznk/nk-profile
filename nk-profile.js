@@ -221,11 +221,13 @@ export class Profile {
 			}
 			.nk-profile__links-link {
 				color: var(--link-color);
+				padding-right: 0;
 				transition: all .3s;
 			}
 			.nk-profile__links-link:hover {
 				color: var(--link-color-hover);
 				text-decoration: none;
+				padding-right: 0.2rem;
 			}
 		`
 		return style
