@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>nk-profile Basic Style</title>
+	<script type="module">
+		import { Profile } from '../nk-profile.js'
+
+		let prof = new Profile()
+
+		prof.width = '300px'
+		prof.image = './women.png'
+		prof.name = 'Tanaka Mari'
+		prof.texts.push('Hi, I am Tanaka Mari. My hobby is programming.')
+		prof.texts.push('Please be friends.')
+		prof.links.push('https://example.com')
+		prof.links.push(['Example', 'https://example.com'])
+		prof.links.push(['postmaster@example.com', 'mailto:postmaster@example.com'])
+
+		document.head.appendChild(prof.createStyleTag())
+		document.body.appendChild(prof.createRoot())
+	</script>
+</head>
+<body>
+</body>
+</html>
